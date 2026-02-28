@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Search\FilterSearchService;
+use App\Services\Search\LikeSearchFilter;
+use App\Services\TaskService;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -9,9 +12,23 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, TaskService $taskService)
     {
-        return view('tasks.index');
+        $term = $request->input('q');
+        $status = $request->input('s');
+
+//        dd(request()->all());
+
+        if($term || $status) {
+            $tasks = $taskService->searchTasks($term, $status, 10);
+        }else {
+            $tasks = $taskService->getPaginatedTasks(10);
+        }
+
+//        $tasks = (!empty($term) && !empty($status)) ?  $taskService->searchTasks($term, $status, 10) : $taskService->getPaginatedTasks(10);
+
+
+        return view('tasks.index', ['tasks' => $tasks, 'term' => $term, 'status' => $status]);
     }
 
     /**

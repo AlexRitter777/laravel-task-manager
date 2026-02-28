@@ -24,7 +24,7 @@ enum TaskStatus : string
         return collect(self::cases())
             ->mapWithKeys(fn ($case) =>
             [
-                $case->value() => $case->label()
+                $case->value => $case->label()
             ])
             ->toArray();
 
