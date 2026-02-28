@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Task;
+use App\Models\User;
 use App\Services\Search\FilterSearchService;
 use App\Services\Search\LikeSearchFilter;
 use App\Services\Search\WhereFilter;
@@ -21,14 +22,16 @@ final class TaskService
     }
 
 
-    public function getPaginatedTasks(int $perPage = 10) : LengthAwarePaginator
+    public function getPaginatedTasks(User $user, int $perPage = 10) : LengthAwarePaginator
     {
-        return Task::orderByDesc('created_at')->paginate($perPage);
+        return Task::whereBelongsTo($user)
+            ->orderByDesc('created_at')
+            ->paginate($perPage);
     }
 
 
 
-    public function searchTasks(?string $term, ?string $status, int $perPage = 10) : LengthAwarePaginator
+    public function searchTasks(User $user, ?string $term, ?string $status, int $perPage = 10) : LengthAwarePaginator
     {
 
         $filters = [
@@ -42,9 +45,10 @@ final class TaskService
             )
         ];
 
-        $query = Task::query();
+        $query = Task::whereBelongsTo($user);
 
         return $this->searchService->apply($query, $filters)
+            ->orderByDesc('created_at')
             ->paginate($perPage);
 
     }
