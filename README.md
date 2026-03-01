@@ -13,7 +13,8 @@
 - Guest and main layouts
 - Blade views with Tailwind CSS (responsive layout with sidebar)
 - Tasks displayed in table format
-- Modal confirmation for delete action
+- Modal confirmation for delete action (Alpine.js)
+- Laravolt/avatar
 - Search by title (LIKE query)
 - Filter by status
 - Query filter classes (LikeSearchFilter, WhereFilter)
