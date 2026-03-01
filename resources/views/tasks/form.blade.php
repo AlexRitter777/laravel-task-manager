@@ -1,6 +1,5 @@
 <x-layout-component>
 
-
     <h2 class="text-base/7 font-semibold mb-3 text-gray-900 dark:text-white">
         @isset($task)
             Edit task - {{ $task->title }}
@@ -63,26 +62,20 @@
                 </button>
                 @isset($task)
                     <div
-                        x-data="{confirmOpen: false}"
-                        x-init="console.log('Alpine is running!')"
+                        x-data
                     >
                         <button
                             type="button"
-                            @click="confirmOpen = true"
+                            @click="$dispatch('confirm-delete', {action: '{{ route('tasks.destroy', $task->id) }}'})"
                             class="rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50 dark:bg-white/10 dark:text-white dark:shadow-none dark:inset-ring-white/5 dark:hover:bg-white/20"
-
                         >
                             Delete
                         </button>
-                        <x-modal-confirm
-                            :delete-path="route('tasks.destroy', $task->id)"
-                        />
+
                     </div>
                 @endisset
             </div>
         </div>
     </form>
-
-
 </x-layout-component>
 

@@ -43,12 +43,22 @@
                                     <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">{{ $task->status->label() }}</td>
                                     <td class="px-3 py-4 text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">{{ $task->deadline_at->format('d.m.Y') }}</td>
                                     <td class="py-4 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0">
-                                        <a
-                                            href="{{ route('tasks.edit', ['task' => $task]) }}"
-                                            class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+                                        <div
+                                            x-data
+
                                         >
-                                            Edit
-                                        </a>
+                                            <a
+                                                href="{{ route('tasks.edit', ['task' => $task]) }}"
+                                                class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300 mr-2"
+                                            >
+                                                Edit
+                                            </a>
+                                            <a href=""
+                                               @click.prevent="$dispatch('confirm-delete', {action: '{{ route('tasks.destroy', $task->id) }}'})"
+                                               class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 dark:hover:text-indigo-300"
+                                            >Delete</a>
+
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -63,7 +73,4 @@
             </div>
         </div>
     </div>
-
-
-
 </x-layout-component>

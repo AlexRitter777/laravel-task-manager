@@ -38,5 +38,6 @@
         </div>
     </main>
 </div>
+<x-global-confirm-modal/>
 </body>
 </html>
