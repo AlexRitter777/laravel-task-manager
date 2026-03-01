@@ -28,7 +28,6 @@ enum TaskStatus : string
             ])
             ->toArray();
 
-        //or old foreach...
     }
 
 }

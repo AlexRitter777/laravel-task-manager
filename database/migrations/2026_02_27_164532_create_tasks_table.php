@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('status', ['todo', 'doing', 'done'])->default('todo');
             $table->date('deadline_at')->nullable();
             $table->timestamps();
+            $table->index(['user_id', 'created_at']);
         });
     }
 

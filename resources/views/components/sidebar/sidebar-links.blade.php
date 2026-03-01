@@ -17,7 +17,7 @@
                 title="Tasks"
                 :href="route('tasks.index')"
             >
-                <x-icons.icon-two-users
+                <x-icons.icon-documents
                     class="size-6 text-gray-400 group-hover:text-indigo-600 dark:group-hover:text-white"
                 />
             </x-sidebar.sidebar-link>

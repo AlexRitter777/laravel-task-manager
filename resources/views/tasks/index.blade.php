@@ -3,8 +3,6 @@
 
     <div class="px-4 sm:px-6 lg:px-8">
 
-        <x-success  :message="session('success')"/>
-
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
                 <h1 class="text-base font-semibold text-gray-900 dark:text-white">All Tasks</h1>

@@ -6,7 +6,7 @@
     <!doctype html>
 <html
     class="h-full bg-white dark:bg-gray-900"
-    lang="cs"
+    lang="en"
 >
 <head>
     <meta charset="UTF-8">
@@ -33,6 +33,7 @@
 
     <main class="py-10">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <x-success :message="session('success')"/>
             {{ $slot }}
         </div>
     </main>

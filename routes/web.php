@@ -10,7 +10,8 @@ Route::middleware('auth')->group(function () {
         return redirect()->route('tasks.index');
     });
 
-    Route::resource('tasks', TaskController::class);
+    Route::resource('tasks', TaskController::class)
+        ->except(['show']);
 
 });
 

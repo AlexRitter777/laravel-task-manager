@@ -24,12 +24,35 @@ final class TaskService
 
     public function getPaginatedTasks(User $user, int $perPage = 10) : LengthAwarePaginator
     {
-        return Task::whereBelongsTo($user)
+        return $user->tasks()
             ->orderByDesc('created_at')
             ->paginate($perPage);
     }
 
+    public function createTask(array $data, User $user): Task
+    {
+       return $user->tasks()->create($data);
+    }
 
+    public function getUserOwnedTasks(int $id, User $user): Task
+    {
+        return $user->tasks()->findOrFail($id);
+    }
+
+    public function updateTask(int $id, array $data, User $user): Task
+    {
+        $task = $user->tasks()
+            ->findOrFail($id);
+
+        $task->update($data);
+
+        return $task;
+    }
+
+    public function deleteTask(int $id, User $user): void
+    {
+        $user->tasks()->findOrFail($id)->delete();
+    }
 
     public function searchTasks(User $user, ?string $term, ?string $status, int $perPage = 10) : LengthAwarePaginator
     {
